@@ -3,22 +3,19 @@
 
 using byte = char;
 
-
-namespace details
+void __memory_copy(byte *dest, byte *src, int size)
 {
-    void memory_copy(byte *dest, byte *src, int size)
-    {
-        for (int i = 0; i < size; i++)
-            dest[i] = src[i];
-    }
-    
-    template <typename T> struct remove_ref {using type = T;};
-    template <typename T> struct remove_ref<T&> {using type = T;};
-    template <typename T> struct remove_ref<T&&> {using type = T;};
-    
-    template <typename T>
-    using remove_ref_t = typename remove_ref<T>::type;
+    for (int i = 0; i < size; i++)
+        dest[i] = src[i];
 }
+    
+template <typename T> struct remove_ref {using type = T;};
+template <typename T> struct remove_ref<T&> {using type = T;};
+template <typename T> struct remove_ref<T&&> {using type = T;};
+    
+template <typename T>
+using remove_ref_t = typename remove_ref<T>::type;
+
 
 template <typename T>
 byte* to_byte_ptr(T *ptr)
@@ -27,15 +24,15 @@ byte* to_byte_ptr(T *ptr)
 }
 
 template <typename T>
-details::remove_ref_t<T>* to_ptr(byte *ptr)
+remove_ref_t<T>* to_ptr(byte *ptr)
 {
-    return static_cast<details::remove_ref_t<T>*>(static_cast<void*>(ptr));
+    return static_cast<remove_ref_t<T>*>(static_cast<void*>(ptr));
 }
 
 template <typename T>
 void memory_copy_by_addr(T *dest, T *src, int size)
 {
-    details::memory_copy(
+    __memory_copy(
         to_byte_ptr(dest), 
         to_byte_ptr(src), 
                          size);
@@ -44,7 +41,7 @@ void memory_copy_by_addr(T *dest, T *src, int size)
 template <typename T>
 void memory_copy(T &dest, T &src)
 {
-    details::memory_copy(
+    __memory_copy(
         to_byte_ptr(&dest), 
         to_byte_ptr(&src), 
                          sizeof(T));
