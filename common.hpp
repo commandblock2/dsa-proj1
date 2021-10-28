@@ -21,20 +21,32 @@ namespace details
 }
 
 template <typename T>
-void memory_copy_by_addr(T *dest, T *src)
+byte* to_byte_ptr(T *ptr)
+{
+    return static_cast<byte*>(static_cast<void*>(ptr));
+}
+
+template <typename T>
+details::remove_ref_t<T>* to_ptr(byte *ptr)
+{
+    return static_cast<details::remove_ref_t<T>*>(static_cast<void*>(ptr));
+}
+
+template <typename T>
+void memory_copy_by_addr(T *dest, T *src, int size)
 {
     details::memory_copy(
-        static_cast<byte*>(static_cast<void*>(dest)), 
-        static_cast<byte*>(static_cast<void*>(src)), 
-                         sizeof(T));
+        to_byte_ptr(dest), 
+        to_byte_ptr(src), 
+                         size);
 }
 
 template <typename T>
 void memory_copy(T &dest, T &src)
 {
     details::memory_copy(
-        static_cast<byte*>(static_cast<void*>(&dest)), 
-        static_cast<byte*>(static_cast<void*>(&src)), 
+        to_byte_ptr(&dest), 
+        to_byte_ptr(&src), 
                          sizeof(T));
 }
 
@@ -44,9 +56,9 @@ void swap_copy(T &lhs, T &rhs)
     int constexpr element_size = sizeof(lhs);
     byte *temp = new byte[element_size];
     
-    memory_copy_by_addr(temp, static_cast<byte*>(static_cast<void*>(&lhs)));
-    memory_copy_by_addr(&lhs, &rhs);
-    memory_copy_by_addr(static_cast<byte*>(static_cast<void*>(&rhs)), temp);
+    memory_copy_by_addr(temp, to_byte_ptr(&lhs), element_size);
+    memory_copy_by_addr(&lhs, &rhs, element_size);
+    memory_copy_by_addr(to_byte_ptr(&rhs), temp, element_size);
     
     delete[] temp;
 }
