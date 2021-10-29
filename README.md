@@ -1,4 +1,7 @@
 # DSA Project 1 Report
+UCD Student Number: 20205861  
+BDIC Student Number: 20374215  
+Name: BoXuan Hu  
 ## Implementation
 This project was implemented using C++ with CMake build system.  
 The implementations of the 3 algorithm are in the 3 .cpp file respectively.  
