@@ -80,4 +80,5 @@ GNU/Linux(5.14.9)|x86-64|clang-12|true
 Microsoft Windows 10|x86-64|MSVC 14.25|true
 Android/Linux(3.18.124)|aarch64|clang-13|true
 - A copy of compiled binaries on `GNU/Linux(5.14.9)|x86-64|gcc-11.2.0` are in the `build/` directory.
-- The equivalent of the generic algorithms(templates, lambdas) can be implemented in Java with interfaces, generic, anonymous class/lambda.
+- The equivalent of the generic algorithms(templates, lambdas) can be implemented in Java with interfaces, generic, anonymous clasgos/lambda.
+- The algorithm theoretically works all types that has [RandomAccessIterator](https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator), `int[], int[], std::vector<T>, etc.`.
