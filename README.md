@@ -76,12 +76,12 @@ Solved by using copying byte by byte. (`memory_copy` function in `common.hpp`).
 The current git history only has the rewritten code. The remote `origin` points to a **private** repo to avoid such accident happening again.
 - This project has been tested on following platforms:
 
-Platform | Arch | ToolChain | Success
----------|------|----------|---------
-GNU/Linux(5.14.9)|x86-64|gcc-11.2.0|true
-GNU/Linux(5.14.9)|x86-64|clang-12|true
-Microsoft Windows 10|x86-64|MSVC 14.25|true
-Android/Linux(3.18.124)|aarch64|clang-13|true
+|Platform | Arch | ToolChain | Success|
+|---------|------|----------|---------|
+|GNU/Linux(5.14.9)|x86-64|gcc-11.2.0|true|
+|GNU/Linux(5.14.9)|x86-64|clang-12|true|
+|Microsoft Windows 10|x86-64|MSVC 14.25|true|
+|Android/Linux(3.18.124)|aarch64|clang-13|true|
 - A copy of compiled binaries on `GNU/Linux(5.14.9)|x86-64|gcc-11.2.0` are in the `build/` directory.
 - The equivalent of the generic algorithms(templates, lambdas) can be implemented in Java with interfaces, generic, anonymous clasgos/lambda.
 - The algorithm theoretically works all types that has [RandomAccessIterator](https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator), `int[], int[], std::vector<T>, etc.`.
